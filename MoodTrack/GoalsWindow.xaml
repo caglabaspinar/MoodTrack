@@ -1,0 +1,124 @@
+﻿<Window x:Class="MoodTrack.GoalsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Goals"
+        Height="700"
+        Width="500"
+        MinHeight="620"
+        MinWidth="450"
+        MaxHeight="800"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
+        Background="#FFF5FA">
+
+    <Grid Margin="20">
+        <Border Background="#FFEAF4"
+                CornerRadius="28"
+                Padding="24"
+                BorderBrush="#F5A9C2"
+                BorderThickness="2">
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+
+                    <TextBlock Text="☑"
+                               FontSize="40"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,6"/>
+
+                    <TextBlock Text="DailyGoals"
+                               FontSize="28"
+                               FontWeight="Bold"
+                               Foreground="#C84F7B"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,6"/>
+
+                    <TextBlock x:Name="txtDate"
+                               FontSize="15"
+                               FontWeight="SemiBold"
+                               Foreground="#A85D7A"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,24"/>
+
+                    <TextBlock Text="Günlük hedef ekle"
+                               FontSize="16"
+                               FontWeight="Bold"
+                               Foreground="#A64D79"
+                               Margin="0,0,0,8"/>
+
+                    <Grid Margin="0,0,0,14">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="110" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox x:Name="txtNewGoal"
+                                 Grid.Column="0"
+                                 Height="56"
+                                 FontSize="16"
+                                 Padding="10"
+                                 VerticalContentAlignment="Center"
+                                 Background="#FFF8FC"
+                                 BorderBrush="#F2A8C5"
+                                 BorderThickness="2"/>
+
+                        <Button Grid.Column="2"
+                                Content="Ekle"
+                                Height="40"
+                                FontWeight="Bold"
+                                Background="#E989AF"
+                                Foreground="White"
+                                BorderBrush="#E989AF"
+                                Click="BtnAddGoal_Click"/>
+                    </Grid>
+
+                    <Border Background="#FFF8FC"
+                            BorderBrush="#F2A8C5"
+                            BorderThickness="2"
+                            CornerRadius="10"
+                            Padding="10"
+                            Margin="0,0,0,22">
+                        <StackPanel x:Name="goalsPanel"/>
+                    </Border>
+
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0"
+                                Content="Kaydet"
+                                Height="44"
+                                FontWeight="Bold"
+                                Background="#E989AF"
+                                Foreground="White"
+                                BorderBrush="#E989AF"
+                                Click="BtnSave_Click"/>
+
+                        <Button Grid.Column="2"
+                                Content="Kapat"
+                                Height="44"
+                                FontWeight="Bold"
+                                Background="#D8A3BC"
+                                Foreground="White"
+                                BorderBrush="#D8A3BC"
+                                Click="BtnClose_Click"/>
+                    </Grid>
+
+                    <TextBlock x:Name="txtSaveStatus"
+                               Text=""
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               Foreground="#C84F7B"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center"
+                               Margin="0,6,0,0"/>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Window>

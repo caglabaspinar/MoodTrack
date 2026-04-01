@@ -1,0 +1,100 @@
+﻿<Window x:Class="MoodTrack.CalendarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Takvim"
+        Height="820"
+        Width="620"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#FFF5FA">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- ÜST BLOK -->
+        <Border Grid.Row="0"
+                Background="#FFEAF4"
+                CornerRadius="28"
+                Padding="20"
+                BorderBrush="#F5A9C2"
+                BorderThickness="2"
+                Margin="0,0,0,12">
+
+            <StackPanel>
+                <TextBlock Text="Takvim"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#C84F7B"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,6"/>
+
+                <TextBlock Text="Gün seç"
+                           FontSize="13"
+                           Foreground="#A85D7A"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,14"/>
+
+                <Calendar x:Name="calendarEntries"
+                          SelectedDatesChanged="CalendarEntries_SelectedDatesChanged"
+                          Background="White"
+                          HorizontalAlignment="Center"
+                          Margin="0,0,0,14"/>
+
+                <Button Content="Kapat"
+                        Height="40"
+                        Width="220"
+                        HorizontalAlignment="Center"
+                        Background="#E989AF"
+                        Foreground="White"
+                        BorderBrush="#E989AF"
+                        FontWeight="Bold"
+                        Click="BtnClose_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- ALT BLOK -->
+        <Border Grid.Row="1"
+                Background="#FFEAF4"
+                CornerRadius="28"
+                Padding="20"
+                BorderBrush="#F5A9C2"
+                BorderThickness="2">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock x:Name="txtSelectedDate"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           Foreground="#C84F7B"
+                           Margin="0,0,0,12"/>
+
+                <ListBox x:Name="lstEntries"
+                         Grid.Row="1"
+                         Background="White"
+                         BorderBrush="#F5A9C2"
+                         Padding="10"
+                         FontSize="14"
+                         HorizontalContentAlignment="Stretch"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         TextOptions.TextFormattingMode="Display">
+
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="Margin" Value="0,0,0,10"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
