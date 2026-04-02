@@ -6,35 +6,18 @@ using System.Windows.Controls;
 
 namespace MoodTrack
 {
-    public partial class GoalsWindow : Window
+    public partial class GoalsPage : Page
     {
         private readonly Database db = new Database();
         private readonly DateTime selectedDate = DateTime.Today;
         private readonly List<GoalItem> goals = new List<GoalItem>();
 
-        public GoalsWindow()
+        public GoalsPage()
         {
             InitializeComponent();
 
-            this.Loaded += GoalsWindow_Loaded;
-
             txtDate.Text = selectedDate.ToString("dd.MM.yyyy");
             LoadData();
-        }
-
-        private void GoalsWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.MaxHeight = SystemParameters.WorkArea.Height - 20;
-            this.MaxWidth = SystemParameters.WorkArea.Width - 20;
-
-            if (this.Height > this.MaxHeight)
-                this.Height = this.MaxHeight;
-
-            if (this.Width > this.MaxWidth)
-                this.Width = this.MaxWidth;
-
-            this.Top = (SystemParameters.WorkArea.Height - this.Height) / 2;
-            this.Left = (SystemParameters.WorkArea.Width - this.Width) / 2;
         }
 
         private void LoadData()
@@ -184,9 +167,18 @@ namespace MoodTrack
             return list;
         }
 
-        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        private void GoBack_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            if (NavigationService != null && NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+                return;
+            }
+
+            if (Window.GetWindow(this) is MainWindow mainWindow)
+            {
+                mainWindow.ReturnToHome();
+            }
         }
 
         private class GoalItem

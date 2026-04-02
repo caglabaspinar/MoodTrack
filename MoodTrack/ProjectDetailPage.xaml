@@ -1,0 +1,126 @@
+﻿<Page x:Class="MoodTrack.ProjectDetailPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Project Detail"
+      Background="#F7F0FF">
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="12"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="12"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- HEADER + GERİ BUTONU -->
+        <Border Grid.Row="0"
+                Background="#E9D8FD"
+                CornerRadius="16"
+                Padding="16"
+                Margin="0,0,0,12"
+                BorderBrush="#D6BFF5"
+                BorderThickness="1.5">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- GERİ BUTONU -->
+                <Button Content="←"
+                        Width="36"
+                        Height="36"
+                        Click="GoBack_Click"
+                        Background="#D6BFF5"
+                        Foreground="White"
+                        BorderBrush="#D6BFF5"
+                        FontWeight="Bold"/>
+
+                <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                    <TextBlock Text="Proje Detayı"
+                               FontSize="14"
+                               Foreground="#6F5B8F"/>
+                    <TextBlock x:Name="txtTitle"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               Foreground="#5B3B8A"
+                               Margin="0,4,0,0"
+                               TextWrapping="Wrap"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- YENİ TASK -->
+        <Border Grid.Row="1"
+                Background="#FFFFFF"
+                CornerRadius="14"
+                Padding="14"
+                BorderBrush="#E3D4FA"
+                BorderThickness="1.5">
+            <StackPanel>
+                <TextBlock Text="Yeni Hedef"
+                           FontWeight="SemiBold"
+                           Foreground="#5B3B8A"
+                           Margin="0,0,0,8"/>
+
+                <TextBox x:Name="txtTask"
+                         Height="36"
+                         Padding="10,6"
+                         FontSize="14"
+                         Background="#FCFAFF"
+                         BorderBrush="#D6BFF5"
+                         BorderThickness="1.5"
+                         Margin="0,0,0,10"/>
+
+                <Button Content="Hedef Ekle"
+                        Height="38"
+                        Click="AddTask_Click"
+                        Background="#C9A7FF"
+                        Foreground="White"
+                        BorderBrush="#C9A7FF"
+                        FontWeight="SemiBold"/>
+            </StackPanel>
+        </Border>
+
+        <!-- AKTİF -->
+        <Border Grid.Row="3"
+                Background="#FFFFFF"
+                CornerRadius="14"
+                Padding="14"
+                BorderBrush="#E3D4FA"
+                BorderThickness="1.5">
+            <StackPanel>
+                <TextBlock Text="Aktif Hedefler"
+                           FontWeight="SemiBold"
+                           Foreground="#5B3B8A"
+                           Margin="0,0,0,10"/>
+                <ListBox x:Name="lstActive"
+                         Background="#FCFAFF"
+                         BorderBrush="#E6DAFA"
+                         BorderThickness="1.5"/>
+            </StackPanel>
+        </Border>
+
+        <!-- TAMAMLANAN -->
+        <Border Grid.Row="5"
+                Background="#FFFFFF"
+                CornerRadius="14"
+                Padding="14"
+                BorderBrush="#E3D4FA"
+                BorderThickness="1.5">
+            <StackPanel>
+                <TextBlock Text="Tamamlanmış Hedefler"
+                           FontWeight="SemiBold"
+                           Foreground="#5B3B8A"
+                           Margin="0,0,0,10"/>
+                <ListBox x:Name="lstCompleted"
+                         Background="#FCFAFF"
+                         BorderBrush="#E6DAFA"
+                         BorderThickness="1.5"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

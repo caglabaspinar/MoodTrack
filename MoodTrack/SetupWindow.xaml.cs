@@ -52,6 +52,7 @@ namespace MoodTrack
             db.CreateUser(user);
 
             MessageBox.Show("İlk kurulum tamamlandı.");
+            DialogResult = true;
             Close();
         }
     }

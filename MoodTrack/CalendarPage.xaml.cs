@@ -5,11 +5,11 @@ using System.Windows.Controls;
 
 namespace MoodTrack
 {
-    public partial class CalendarWindow : Window
+    public partial class CalendarPage : Page
     {
         private readonly Database db = new Database();
 
-        public CalendarWindow()
+        public CalendarPage()
         {
             InitializeComponent();
             calendarEntries.SelectedDate = DateTime.Today;
@@ -61,9 +61,18 @@ namespace MoodTrack
             }
         }
 
-        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            if (NavigationService != null && NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+                return;
+            }
+
+            if (Window.GetWindow(this) is MainWindow mainWindow)
+            {
+                mainWindow.ReturnToHome();
+            }
         }
     }
 }

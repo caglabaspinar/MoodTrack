@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace MoodTrack
 {
-    public partial class DailyEntryWindow : Window
+    public partial class DailyEntryPage : Page
     {
         private readonly Database db = new Database();
 
-        public DailyEntryWindow()
+        public DailyEntryPage()
         {
             InitializeComponent();
 
@@ -32,8 +33,8 @@ namespace MoodTrack
                 return;
             }
 
-            string lifeScoreText = cbLifeScore.Text;
-            string relationshipScoreText = cbRelationshipScore.Text;
+            string lifeScoreText = ((ComboBoxItem)cbLifeScore.SelectedItem).Content.ToString() ?? "3";
+            string relationshipScoreText = ((ComboBoxItem)cbRelationshipScore.SelectedItem).Content.ToString() ?? "3";
 
             int lifeScore = int.Parse(lifeScoreText.Substring(0, 1));
             int relationshipScore = int.Parse(relationshipScoreText.Substring(0, 1));
@@ -60,11 +61,21 @@ namespace MoodTrack
             txtStatus.Text = "Günlük giriş kaydedildi / güncellendi.";
         }
 
-        private void BtnClose_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
 
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService != null && NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+                return;
+            }
+
+            if (Window.GetWindow(this) is MainWindow mainWindow)
+            {
+                mainWindow.ReturnToHome();
+            }
+        }
         private void dpDate_SelectedDateChanged(object sender, RoutedEventArgs e)
         {
             LoadExistingEntriesForSelectedDate();

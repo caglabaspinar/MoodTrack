@@ -1,13 +1,14 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace MoodTrack
 {
-    public partial class ReportsWindow : Window
+    public partial class ReportsPage : Page
     {
         private readonly Database db = new Database();
         private readonly AnalysisService analysisService;
 
-        public ReportsWindow()
+        public ReportsPage()
         {
             InitializeComponent();
 
@@ -23,9 +24,18 @@ namespace MoodTrack
             txtMonthlyReport.Text = analysisService.BuildMonthlyReport();
         }
 
-        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            if (NavigationService != null && NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+                return;
+            }
+
+            if (Window.GetWindow(this) is MainWindow mainWindow)
+            {
+                mainWindow.ReturnToHome();
+            }
         }
     }
 }

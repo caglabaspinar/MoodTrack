@@ -52,6 +52,21 @@ namespace MoodTrack
                     Date TEXT UNIQUE,
                     GoalsText TEXT
                 );
+
+                CREATE TABLE IF NOT EXISTS Projects
+                (
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Name TEXT NOT NULL
+                );
+
+                CREATE TABLE IF NOT EXISTS ProjectTasks
+                (
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    ProjectId INTEGER NOT NULL,
+                    Title TEXT NOT NULL,
+                    IsCompleted INTEGER NOT NULL DEFAULT 0,
+                    FOREIGN KEY(ProjectId) REFERENCES Projects(Id)
+                );
             ";
             cmd.ExecuteNonQuery();
         }
@@ -417,6 +432,114 @@ namespace MoodTrack
             object? result = cmd.ExecuteScalar();
 
             return result?.ToString() ?? "";
+        }
+
+        public void AddProject(string name)
+        {
+            using var connection = new SqliteConnection(ConnectionString);
+            connection.Open();
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"
+                INSERT INTO Projects (Name)
+                VALUES ($name);
+            ";
+            cmd.Parameters.AddWithValue("$name", name);
+
+            cmd.ExecuteNonQuery();
+        }
+
+        public List<Project> GetProjects()
+        {
+            List<Project> list = new List<Project>();
+
+            using var connection = new SqliteConnection(ConnectionString);
+            connection.Open();
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"
+                SELECT Id, Name
+                FROM Projects
+                ORDER BY Id DESC
+            ";
+
+            using var reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                list.Add(new Project
+                {
+                    Id = reader.GetInt32(0),
+                    Name = reader.GetString(1)
+                });
+            }
+
+            return list;
+        }
+
+        public void AddProjectTask(int projectId, string title)
+        {
+            using var connection = new SqliteConnection(ConnectionString);
+            connection.Open();
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"
+                INSERT INTO ProjectTasks (ProjectId, Title, IsCompleted)
+                VALUES ($projectId, $title, 0);
+            ";
+            cmd.Parameters.AddWithValue("$projectId", projectId);
+            cmd.Parameters.AddWithValue("$title", title);
+
+            cmd.ExecuteNonQuery();
+        }
+
+        public List<ProjectTask> GetProjectTasks(int projectId)
+        {
+            List<ProjectTask> list = new List<ProjectTask>();
+
+            using var connection = new SqliteConnection(ConnectionString);
+            connection.Open();
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"
+                SELECT Id, ProjectId, Title, IsCompleted
+                FROM ProjectTasks
+                WHERE ProjectId = $projectId
+                ORDER BY IsCompleted ASC, Id DESC
+            ";
+            cmd.Parameters.AddWithValue("$projectId", projectId);
+
+            using var reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                list.Add(new ProjectTask
+                {
+                    Id = reader.GetInt32(0),
+                    ProjectId = reader.GetInt32(1),
+                    Title = reader.GetString(2),
+                    IsCompleted = reader.GetInt32(3) == 1
+                });
+            }
+
+            return list;
+        }
+
+        public void ToggleProjectTask(int taskId, bool isCompleted)
+        {
+            using var connection = new SqliteConnection(ConnectionString);
+            connection.Open();
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"
+                UPDATE ProjectTasks
+                SET IsCompleted = $isCompleted
+                WHERE Id = $taskId;
+            ";
+            cmd.Parameters.AddWithValue("$isCompleted", isCompleted ? 1 : 0);
+            cmd.Parameters.AddWithValue("$taskId", taskId);
+
+            cmd.ExecuteNonQuery();
         }
     }
 }

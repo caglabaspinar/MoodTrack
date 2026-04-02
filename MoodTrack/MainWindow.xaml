@@ -8,11 +8,12 @@
         Title="MoodTrack"
         Height="760"
         Width="520"
-        MinHeight="650"
-        MinWidth="480"
-        MaxHeight="820"
+        MinHeight="760"
+        MinWidth="520"
+        MaxHeight="760"
+        MaxWidth="520"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="CanMinimize"
+        ResizeMode="NoResize"
         Background="#FFF5FA">
 
     <Grid Margin="20">
@@ -88,13 +89,17 @@
                 Visibility="Collapsed"
                 Background="#FFEAF4"
                 CornerRadius="28"
-                Padding="28"
+                Padding="20"
                 BorderBrush="#F5A9C2"
                 BorderThickness="2">
 
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
+                <StackPanel Grid.Row="0" Margin="0,0,0,14">
                     <TextBlock x:Name="txtWelcome"
                                Text="Hoş geldin"
                                FontSize="28"
@@ -103,117 +108,151 @@
                                HorizontalAlignment="Center"
                                Margin="0,8,0,10"/>
 
-                    <TextBlock Text="Bugün hangi sayfaya gitmek istersin?"
+                    <TextBlock x:Name="txtSubtitle"
+                               Text="Bugün hangi sayfaya gitmek istersin?"
                                FontSize="14"
                                Foreground="#A85D7A"
-                               HorizontalAlignment="Center"
-                               Margin="0,0,0,26"/>
-
-                    <Button x:Name="btnDailyEntry"
-                            Height="120"
-                            Margin="0,0,0,18"
-                            Background="#FFD7E8"
-                            BorderBrush="#F2A8C5"
-                            BorderThickness="2"
-                            Click="BtnDailyEntry_Click">
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="📝"
-                                       FontSize="34"
-                                       HorizontalAlignment="Center"/>
-                            <TextBlock Text="Daily Entry"
-                                       FontSize="22"
-                                       FontWeight="Bold"
-                                       Foreground="#A64D79"
-                                       HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
-
-                    <Button x:Name="btnGoals"
-                            Height="120"
-                            Margin="0,0,0,18"
-                            Background="#FFE0EC"
-                            BorderBrush="#F2A8C5"
-                            BorderThickness="2"
-                            Click="BtnGoals_Click">
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="☑"
-                                       FontSize="34"
-                                       HorizontalAlignment="Center"/>
-                            <TextBlock Text="Goals"
-                                       FontSize="22"
-                                       FontWeight="Bold"
-                                       Foreground="#A64D79"
-                                       HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
-
-                    <Button x:Name="btnCalendar"
-                            Height="120"
-                            Margin="0,0,0,18"
-                            Background="#FFDDEE"
-                            BorderBrush="#F2A8C5"
-                            BorderThickness="2"
-                            Click="BtnCalendar_Click">
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="📅"
-                                       FontSize="34"
-                                       HorizontalAlignment="Center"/>
-                            <TextBlock Text="Calendar"
-                                       FontSize="22"
-                                       FontWeight="Bold"
-                                       Foreground="#A64D79"
-                                       HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
-
-                    <Button x:Name="btnBoss"
-                            Height="120"
-                            Margin="0,0,0,18"
-                            Background="#FFE3EF"
-                            BorderBrush="#F2A8C5"
-                            BorderThickness="2"
-                            Click="BtnBoss_Click">
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="👑"
-                                       FontSize="34"
-                                       HorizontalAlignment="Center"/>
-                            <TextBlock Text="Boss"
-                                       FontSize="22"
-                                       FontWeight="Bold"
-                                       Foreground="#A64D79"
-                                       HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
-
-                    <Button x:Name="btnReports"
-                            Height="120"
-                            Margin="0,0,0,24"
-                            Background="#FFF0F7"
-                            BorderBrush="#F2A8C5"
-                            BorderThickness="2"
-                            Click="BtnReports_Click">
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="📊"
-                                       FontSize="34"
-                                       HorizontalAlignment="Center"/>
-                            <TextBlock Text="Reports"
-                                       FontSize="22"
-                                       FontWeight="Bold"
-                                       Foreground="#A64D79"
-                                       HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
-
-                    <Button x:Name="btnLogout"
-                            Content="Çıkış Yap"
-                            Height="46"
-                            FontWeight="Bold"
-                            Background="#E08AB0"
-                            Foreground="White"
-                            BorderBrush="#E08AB0"
-                            Click="BtnLogout_Click"/>
+                               HorizontalAlignment="Center"/>
                 </StackPanel>
-            </ScrollViewer>
+
+                <Grid Grid.Row="1">
+
+                    <ScrollViewer x:Name="HomeMenuPanel"
+                                  VerticalScrollBarVisibility="Auto"
+                                  Visibility="Visible">
+                        <StackPanel>
+
+                            <Button x:Name="btnDailyEntry"
+                                    Height="120"
+                                    Margin="0,0,0,18"
+                                    Background="#FFD7E8"
+                                    BorderBrush="#F2A8C5"
+                                    BorderThickness="2"
+                                    Click="BtnDailyEntry_Click">
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="📝"
+                                               FontSize="34"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Daily Entry"
+                                               FontSize="22"
+                                               FontWeight="Bold"
+                                               Foreground="#A64D79"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button x:Name="btnGoals"
+                                    Height="120"
+                                    Margin="0,0,0,18"
+                                    Background="#FFE0EC"
+                                    BorderBrush="#F2A8C5"
+                                    BorderThickness="2"
+                                    Click="BtnGoals_Click">
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="☑"
+                                               FontSize="34"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Goals"
+                                               FontSize="22"
+                                               FontWeight="Bold"
+                                               Foreground="#A64D79"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button x:Name="btnCalendar"
+                                    Height="120"
+                                    Margin="0,0,0,18"
+                                    Background="#FFDDEE"
+                                    BorderBrush="#F2A8C5"
+                                    BorderThickness="2"
+                                    Click="BtnCalendar_Click">
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="📅"
+                                               FontSize="34"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Calendar"
+                                               FontSize="22"
+                                               FontWeight="Bold"
+                                               Foreground="#A64D79"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button x:Name="btnProjects"
+                                    Height="120"
+                                    Margin="0,0,0,18"
+                                    Background="#FFDDEE"
+                                    BorderBrush="#F2A8C5"
+                                    BorderThickness="2"
+                                    Click="OpenProjects">
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="📁"
+                                               FontSize="34"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Projects"
+                                               FontSize="22"
+                                               FontWeight="Bold"
+                                               Foreground="#A64D79"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button x:Name="btnBoss"
+                                    Height="120"
+                                    Margin="0,0,0,18"
+                                    Background="#FFE3EF"
+                                    BorderBrush="#F2A8C5"
+                                    BorderThickness="2"
+                                    Click="BtnBoss_Click">
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="👑"
+                                               FontSize="34"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Boss"
+                                               FontSize="22"
+                                               FontWeight="Bold"
+                                               Foreground="#A64D79"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button x:Name="btnReports"
+                                    Height="120"
+                                    Margin="0,0,0,24"
+                                    Background="#FFF0F7"
+                                    BorderBrush="#F2A8C5"
+                                    BorderThickness="2"
+                                    Click="BtnReports_Click">
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="📊"
+                                               FontSize="34"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Reports"
+                                               FontSize="22"
+                                               FontWeight="Bold"
+                                               Foreground="#A64D79"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button x:Name="btnLogout"
+                                    Content="Çıkış Yap"
+                                    Height="46"
+                                    FontWeight="Bold"
+                                    Background="#E08AB0"
+                                    Foreground="White"
+                                    BorderBrush="#E08AB0"
+                                    Click="BtnLogout_Click"/>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <Frame x:Name="MainFrame"
+                           Visibility="Collapsed"
+                           NavigationUIVisibility="Hidden"
+                           Background="#FFEAF4"/>
+                </Grid>
+            </Grid>
         </Border>
     </Grid>
 </Window>
